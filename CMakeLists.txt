@@ -6,7 +6,7 @@ cmake_policy(SET CMP0092 NEW) # MSVC warning flags
 
 project(MyGameEngine 
     VERSION 0.1.0 
-    LANGUAGES CXX
+    LANGUAGES C CXX
     DESCRIPTION "Modern C++23 Game Engine"
 )
 

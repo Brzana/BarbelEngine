@@ -122,13 +122,9 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(glfw glm)
 
 # --- GLAD ---
-FetchContent_Declare(
-    glad
-    GIT_REPOSITORY https://github.com/Dav1dde/glad.git
-    GIT_TAG v2.0.4
-)
+add_library(glad STATIC vendor/glad/src/glad.c)
 
-FetchContent_MakeAvailable(glad)
+target_include_directories(glad PUBLIC vendor/glad/include)
 
 # Linking external libraries to the Engine target
 target_link_libraries(Engine 
