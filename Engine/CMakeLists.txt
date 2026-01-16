@@ -15,7 +15,7 @@ file(GLOB ENGINE_HEADERS CONFIGURE_DEPENDS
 add_library(Engine STATIC
     ${ENGINE_SOURCES}
     ${ENGINE_HEADERS}
-)
+ "include/Window.h" "src/Window.cpp")
 
 # Add alias for consistent namespacing
 add_library(Barbel::Engine ALIAS Engine)
@@ -98,8 +98,43 @@ set_target_properties(Engine PROPERTIES FOLDER "Engine")
 # External Dependencies (example - uncomment when needed)
 # ============================================================================
 
-# find_package(glfw3 CONFIG REQUIRED)
-# target_link_libraries(Engine PUBLIC glfw)
+include(FetchContent)
 
-# find_package(glad CONFIG REQUIRED)
-# target_link_libraries(Engine PRIVATE glad::glad)
+# --- GLFW ---
+FetchContent_Declare(
+    glfw
+    GIT_REPOSITORY https://github.com/glfw/glfw.git
+    GIT_TAG 3.4  # Latest stable version
+)
+
+# Disable GLFW extra targets
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+# --- GLM ---
+FetchContent_Declare(
+    glm
+    GIT_REPOSITORY https://github.com/g-truc/glm.git
+    GIT_TAG 1.0.1 # Stable tag
+)
+
+FetchContent_MakeAvailable(glfw glm)
+
+# --- GLAD ---
+FetchContent_Declare(
+    glad
+    GIT_REPOSITORY https://github.com/Dav1dde/glad.git
+    GIT_TAG v2.0.4
+)
+
+FetchContent_MakeAvailable(glad)
+
+# Linking external libraries to the Engine target
+target_link_libraries(Engine 
+    PUBLIC 
+        barbel_compiler_options
+        glfw
+        glm::glm
+        glad
+)

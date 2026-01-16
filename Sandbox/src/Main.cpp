@@ -1,6 +1,10 @@
 #include <Engine.h>
 
 int main() {
-	Engine::printHello();
+
+	Engine::Engine engine(800, 600, "Sandbox");
+
+	engine.Run();
+
 	return 0;
 }
