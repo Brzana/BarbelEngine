@@ -62,8 +62,6 @@
             "inherits": "windows-base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_C_COMPILER": "clang-cl",
-                "CMAKE_CXX_COMPILER": "clang-cl",
                 "BARBEL_ENABLE_WARNINGS_AS_ERRORS": "ON",
                 "BARBEL_ENABLE_SANITIZERS": "ON",
                 "BARBEL_BUILD_TESTS": "ON"
